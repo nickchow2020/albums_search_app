@@ -1,6 +1,7 @@
 const cardDisplayArea = document.querySelector("[data-cards-display-area]")
 const searchForm = document.querySelector("[data-albums-search-form]")
 const searchInput = document.querySelector("[data-albums-search-input]")
+const resultSummary = document.querySelector("[data-results-summary]")
 
 let searchResult = []
 
@@ -23,17 +24,29 @@ searchForm.addEventListener("submit", e => {
   getJSON(searchValue)
   .then(data => {
     searchResult = data
-    render()
+    render(searchValue)
   })
+  .catch(err => console.log("Error :",err))
 
-  searchValue.value = ""
+  searchInput.value = ""
 })
 
 
-function render() {
+function displayHeadline(count="hello",key="yes"){
+  let template = 
+  `
+  <p>${count} results for "${key}"</p>
+  `
+  return template;
+}
+
+
+function render(key="") {
   const allCard = searchResult.results.map( obj => cardTemplate(obj)).join("")
 
   cardDisplayArea.innerHTML = allCard
+
+  resultSummary.innerHTML= displayHeadline(searchResult.resultCount,key)
 }
 
 
@@ -61,13 +74,12 @@ function cardTemplate(data){
 
 
 
-getJSON()
-.then(data => {
-  searchResult = data
-  console.log(searchResult)
-  render()
-})
-.catch(err => console.log("Error :",err))
+// getJSON()
+// .then(data => {
+//   searchResult = data
+//   console.log(searchResult)
+// })
+// .catch(err => console.log("Error :",err))
 
 
 
