@@ -26,6 +26,28 @@
   align-items: center;
 }
 
+
+.main__header{
+  height: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid tomato 2px;
+  margin-bottom: .5rem;
+}
+
+.main__main{
+  padding: .5rem .8rem;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media only screen and (min-width: 768px){
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
 .wrapper{
   width: 70%;
   margin: auto;
@@ -44,7 +66,7 @@
   margin-left: .5rem;
   position: absolute;
   right: 30%;
-  top: 4%;
+  top: 2.5%;
 }
 
 .search__input{
@@ -54,4 +76,37 @@
   outline: none;
   padding: 0 .5rem;
   border-radius: 10px;
+}
+
+
+.card{
+  border: solid 1px tomato;
+  border-radius: 5px;
+  padding: 10px 0;
+  background-color: rgba($color: gray, $alpha: .1);
+  margin-bottom: 1rem;
+
+  &__cover{
+    width: 95%;
+    margin: auto;
+  
+    img{
+      width: 100%;
+      
+    }
+  }
+
+
+  &__album{
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    margin: auto;
+
+    p{
+      text-align: center;
+    }
+  }
 }
