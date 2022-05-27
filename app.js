@@ -19,7 +19,13 @@ async function getJSON(name){
 searchForm.addEventListener("submit", e => {
   e.preventDefault()
 
+
   const searchValue = searchInput.value
+
+  if (searchValue === "" || searchValue === null) {
+    alert("search box can not be empty");
+    return;
+  }
 
   getJSON(searchValue)
   .then(data => {
