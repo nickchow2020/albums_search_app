@@ -1,6 +1,6 @@
 const cardDisplayArea = document.querySelector("[data-cards-display-area]")
-
-
+const searchForm = document.querySelector("[data-albums-search-form]")
+const searchInput = document.querySelector("[data-albums-search-input]")
 
 let searchResult = []
 
@@ -13,6 +13,21 @@ async function getJSON(name){
       throw err
   }
 }
+
+
+searchForm.addEventListener("submit", e => {
+  e.preventDefault()
+
+  const searchValue = searchInput.value
+
+  getJSON(searchValue)
+  .then(data => {
+    searchResult = data
+    render()
+  })
+
+  searchValue.value = ""
+})
 
 
 function render() {
@@ -46,7 +61,7 @@ function cardTemplate(data){
 
 
 
-getJSON("gaga")
+getJSON()
 .then(data => {
   searchResult = data
   console.log(searchResult)
