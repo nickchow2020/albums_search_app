@@ -1,3 +1,57 @@
 @import "./normalize";
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+*::after,
+*::before{
+  margin: 0;
+  padding: 0;
+}
+
+.fa-brands{
+  color: gray;
+  font-size: 1.3rem;
+}
+
+
+.header__body{
+  background-color: tomato;
+  height:4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper{
+  width: 70%;
+  margin: auto;
+}
+
+.search__form{
+  width: 60%;
+  margin: auto;
+  display: flex;
+}
+
+.search__btn{
+  border: 0;
+  outline: 0;
+  background: 0;
+  margin-left: .5rem;
+  position: absolute;
+  right: 30%;
+  top: 4%;
+}
+
+.search__input{
+  flex-grow: 1;
+  height: 2em;
+  border: none;
+  outline: none;
+  padding: 0 .5rem;
+  border-radius: 10px;
+}
