@@ -19,13 +19,14 @@ async function getJSON(name){
 searchForm.addEventListener("submit", e => {
   e.preventDefault()
 
-
   const searchValue = searchInput.value
 
   if (searchValue === "" || searchValue === null) {
     alert("search box can not be empty");
     return;
   }
+
+  resultSummary.innerHTML = "<h3>loading...</h3>"
 
   getJSON(searchValue)
   .then(data => {
@@ -54,8 +55,6 @@ function render(key="") {
 
   resultSummary.innerHTML= displayHeadline(searchResult.resultCount,key)
 }
-
-
 
 
 function cardTemplate(data){
