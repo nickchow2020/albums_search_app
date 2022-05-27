@@ -444,11 +444,13 @@ template {
 }
 
 .card {
+  width: 200px;
+  height: 300px;
   border: solid 1px tomato;
   border-radius: 5px;
   padding: 10px 0;
   background-color: rgba(128, 128, 128, 0.1);
-  margin-bottom: 1rem;
+  margin: 1rem auto;
 }
 
 .card__cover {

@@ -80,12 +80,13 @@
 
 
 .card{
+  width: 200px;
+  height: 300px;
   border: solid 1px tomato;
   border-radius: 5px;
   padding: 10px 0;
   background-color: rgba($color: gray, $alpha: .1);
-  margin-bottom: 1rem;
-
+  margin: 1rem auto;
   &__cover{
     width: 95%;
     margin: auto;
