@@ -427,9 +427,19 @@ template {
   outline: 0;
   background: 0;
   margin-left: .5rem;
+}
+
+.search__btn i {
   position: absolute;
-  right: 30%;
-  top: 2.5%;
+  top: 0;
+  margin-top: 1.4rem;
+  left: 65%;
+}
+
+@media only screen and (min-width: 768px) {
+  .search__btn i {
+    left: 69%;
+  }
 }
 
 .search__input {

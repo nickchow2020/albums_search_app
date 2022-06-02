@@ -64,9 +64,17 @@
   outline: 0;
   background: 0;
   margin-left: .5rem;
-  position: absolute;
-  right: 30%;
-  top: 2.5%;
+  
+  i {
+    position: absolute;
+    top: 0;
+    margin-top: 1.4rem;
+    left: 65%;
+
+    @media only screen and (min-width: 768px){
+      left: 69%;
+    }
+  }
 }
 
 .search__input{
