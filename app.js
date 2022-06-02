@@ -5,15 +5,23 @@ const resultSummary = document.querySelector("[data-results-summary]")
 const addMoreBtn = document.querySelector("[data-add-more]")
 
 
-
+// variable to store the whole data for Web API
 let searchResult = []
+
+// variable to store needed data 
 let defaultResult = []
+
+// default display amount
 let defaultValue = 20
 
+// addon display amount
 let addon = 50
 
+// store the search key
 let key = ""
 
+
+// function to fetch data for API
 async function getJSON(name){
   let  URL = `https://itunes.apple.com/search?term=${name}&media=music&entity=album&attribute=artistTerm&limit=200`
   try{
@@ -25,6 +33,7 @@ async function getJSON(name){
 }
 
 
+// event Listener when user search
 searchForm.addEventListener("submit", e => {
   e.preventDefault()
 
@@ -42,12 +51,10 @@ searchForm.addEventListener("submit", e => {
   getJSON(searchValue)
   .then(data => {
     searchResult = data
-    let needData = searchResult.results.slice(0,defaultValue)
 
-    defaultResult = {
-      resultCount : needData.length,
-      results: needData
-    }
+    const needData = sliceNeedDataFromSearchResult(defaultValue)
+
+    formatData(needData)
 
     render(key)
 
@@ -58,6 +65,22 @@ searchForm.addEventListener("submit", e => {
 })
 
 
+// function to format the data we need to render
+function formatData (data){
+  defaultResult = {
+    resultCount : data.length,
+    results: data
+  }
+}
+
+// get data from SearchResult function
+function sliceNeedDataFromSearchResult(length){
+  let needData = searchResult.results.slice(0,length)
+  return needData
+}
+
+
+// function template for display search result
 function displayHeadline(count="",key=""){
   let template = 
   `
@@ -67,6 +90,7 @@ function displayHeadline(count="",key=""){
 }
 
 
+// render function for display new data
 function render(key="") {
   const allCard = defaultResult.results.map( obj => cardTemplate(obj)).join("")
 
@@ -75,7 +99,7 @@ function render(key="") {
   resultSummary.innerHTML= displayHeadline(defaultResult.resultCount,key)
 }
 
-
+// function template for albums card display
 function cardTemplate(data){
   let template = 
   `
@@ -98,19 +122,14 @@ function cardTemplate(data){
 
 
 
-
+// event for add more button to add more data to display
 addMoreBtn.addEventListener("click", e => {
   
   defaultValue += addon
 
-  let newData = searchResult.results.slice(0,defaultValue)
+  let newData = sliceNeedDataFromSearchResult(defaultValue)
 
-  defaultResult = {
-    resultCount : newData.length,
-    results: newData
-  }
-
-  console.log(defaultResult)
+  formatData(newData)
 
   render(key)
 })
