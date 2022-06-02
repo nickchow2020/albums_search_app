@@ -12,6 +12,10 @@
   padding: 0;
 }
 
+body{
+  margin-top: 4rem;
+}
+
 .fa-brands{
   color: gray;
   font-size: 1.3rem;
@@ -24,6 +28,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 

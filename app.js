@@ -2,8 +2,17 @@ const cardDisplayArea = document.querySelector("[data-cards-display-area]")
 const searchForm = document.querySelector("[data-albums-search-form]")
 const searchInput = document.querySelector("[data-albums-search-input]")
 const resultSummary = document.querySelector("[data-results-summary]")
+const addMoreBtn = document.querySelector("[data-add-more]")
+
+
 
 let searchResult = []
+let defaultResult = []
+let defaultValue = 20
+
+let addon = 50
+
+let key = ""
 
 async function getJSON(name){
   let  URL = `https://itunes.apple.com/search?term=${name}&media=music&entity=album&attribute=artistTerm&limit=200`
@@ -26,12 +35,22 @@ searchForm.addEventListener("submit", e => {
     return;
   }
 
+  key = searchValue
+
   resultSummary.innerHTML = "<h3>loading...</h3>"
 
   getJSON(searchValue)
   .then(data => {
     searchResult = data
-    render(searchValue)
+    let needData = searchResult.results.slice(0,defaultValue)
+
+    defaultResult = {
+      resultCount : needData.length,
+      results: needData
+    }
+
+    render(key)
+
   })
   .catch(err => console.log("Error :",err))
 
@@ -39,7 +58,7 @@ searchForm.addEventListener("submit", e => {
 })
 
 
-function displayHeadline(count="hello",key="yes"){
+function displayHeadline(count="",key=""){
   let template = 
   `
   <p>${count} results for "${key}"</p>
@@ -49,11 +68,11 @@ function displayHeadline(count="hello",key="yes"){
 
 
 function render(key="") {
-  const allCard = searchResult.results.map( obj => cardTemplate(obj)).join("")
+  const allCard = defaultResult.results.map( obj => cardTemplate(obj)).join("")
 
   cardDisplayArea.innerHTML = allCard
 
-  resultSummary.innerHTML= displayHeadline(searchResult.resultCount,key)
+  resultSummary.innerHTML= displayHeadline(defaultResult.resultCount,key)
 }
 
 
@@ -76,6 +95,29 @@ function cardTemplate(data){
 
   return template
 }
+
+
+
+
+addMoreBtn.addEventListener("click", e => {
+  
+  defaultValue += addon
+
+  let newData = searchResult.results.slice(0,defaultValue)
+
+  defaultResult = {
+    resultCount : newData.length,
+    results: newData
+  }
+
+  console.log(defaultResult)
+
+  render(key)
+})
+
+
+
+
 
 
 
